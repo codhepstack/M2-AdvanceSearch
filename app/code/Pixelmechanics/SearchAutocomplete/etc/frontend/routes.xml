@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--/**
+ * Route Configuration File.
+ * PM PS, 30.04.20, @link - https://trello.com/c/fR4dyPJV/96-styling-der-basissuchfunktion-im-standard-von-magento-styling-of-magento-default-search-functionality
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="searchautocomplete" frontName="searchautocomplete">
+            <module name="Pixelmechanics_SearchAutocomplete"/>
+        </route>
+    </router>
+</config>

@@ -1,0 +1,63 @@
+<?php
+/**
+* @author : PS
+* @Date : 22th April'20
+* @Description : additional prices template for the product view page.
+* @link : https://trello.com/c/vz1chOWu/81-frontpage-templating-programmierung
+*/
+/**
+ * @var $block \Pixelmechanics\Catalog\Block\Product\View
+ */
+?>
+
+<?php 
+$_priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+$_pmCatalogHelper = $this->helper('Pixelmechanics\Theme\Helper\Catalog');
+// Load complete product collection by ID
+$_product = $_pmCatalogHelper->getProductById($block->getProduct()->getId());
+
+$_finalPrice = $_product->getFinalPrice();
+$_price = $_product->getPrice();
+$result_price = 0;
+
+if ($_finalPrice == $_price) {
+    $result_price = $_priceHelper->currency($_price, true, false);
+} else {
+    $result_price = $_priceHelper->currency($_finalPrice, true, false);
+}
+
+// Load additional prices //
+$attribute_preis_auf_anfrage = $_product->getAttributeText('preisaufanfrage');
+if($attribute_preis_auf_anfrage != 'Ja') { ?>
+    <!-- <span class="price-including-tax">
+        <span itemprop="price" class="price" id="price-including-tax-<?php //echo $_product->getId() ?><?php //echo $block->getIdSuffix() ?>">
+            <?php //echo $_priceHelper->currency($_product->getFinalPrice(), true, false); ?>
+        </span>
+        <span class="label"></span>
+    </span> -->
+    <?php 
+        $listenpreis = $_product->getListenpreis(); 
+        $toneart_price = $_product->getPrice();
+        $uvp_shown = ($listenpreis != 0 && $listenpreis != $toneart_price && $listenpreis > $toneart_price);
+    ?>
+        <span class="price-excluding-tax">
+            <div class="price-compare-toneart">
+                <?php if($uvp_shown) {
+                            echo '<span class="uvp-netto">UVP-Brutto: <span class="netto-price">' .  $_priceHelper->currency($listenpreis, true, false) . '</span></span>';
+                        }
+                ?>
+                <span class="toneart-offered-price"> <?=__('Preis-Brutto')?>: 
+                    <span itemprop="price" class="price" id="price-excluding-tax-<?php echo $_product->getId() ?><?php echo $block->getIdSuffix() ?>">
+                        <span class="offered-price"><?php echo $result_price; ?></span>
+                    </span>
+                </span>
+            </div>
+            <span class="label"></span>
+        </span>
+        <?php if($uvp_shown) { ?>
+            <p class="saved-money-toneart"><?=__('Sie sparen')?>: <?php echo $_priceHelper->currency($listenpreis - $_finalPrice, true, false); ?> <?=__('Brutto')?>
+                <span class="price-reduction-percent">(<?php echo round(((100/$listenpreis)*($listenpreis - $toneart_price)), 2); ?> %)</span>
+            </p>		
+        <?php } 
+     }
+?>

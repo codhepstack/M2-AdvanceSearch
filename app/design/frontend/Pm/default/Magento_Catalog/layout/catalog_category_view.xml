@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Override the category view layout file to modify the layout as per the design.
+ * PM PS, 09.06.20, @link - https://trello.com/c/vz1chOWu/81-frontpage-templating-programmierung
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!--//Move Elements//-->
+    <move element="page.main.title" destination="content" before="-"/>
+    <move element="category.view.container" destination="content" after="page.main.title"/>
+</page>

@@ -1,0 +1,33 @@
+<?php
+/**
+ * Add the custom manufacturer template to add the link on the product detail page
+ * PM PS, 21.04.20, @link - https://trello.com/c/vz1chOWu/81-frontpage-templating-programmierung
+ */
+?>
+<?php /** var @block Magento\Catalog\Block\Product\View */?>
+<?php
+    $_product = $block->getProduct();
+    $_pmCatalogHelper = $this->helper('Pixelmechanics\Theme\Helper\Catalog');
+    $_outputhelper = $this->helper('Magento\Catalog\Helper\Output');
+    $brandRootID = $_product->getBrands();
+
+    $brandObj = $_pmCatalogHelper->getCategoryById($brandRootID);
+    if($brandRootID) {
+        $_imgHtml   = '';
+        if ($_imgUrl = $brandObj->getImageUrl()) {
+            $_imgHtml = '<img src="' . $_imgUrl . '" alt="'.$brandObj->getName().'" />';
+            $_imgHtml = $_outputhelper->categoryAttribute($brandObj, $_imgHtml, 'image');
+        } else {
+            $_imgUrl = $block->getViewFileUrl('Pixelmechanics_Theme::images/brand/brands_placeholder.png');
+            $_imgHtml = '<img src="' . $_imgUrl . '" />';
+        } ?>
+        <div class="product-optional-data">
+            <div class="brands-data">
+                <!-- brand -->
+                <span class="brand-logo"><a href="<?=$brandObj->getUrl()?>"><?=$_imgHtml?></a></span>
+                <span class="brand-view-all-products"><a href="<?=$brandObj->getUrl()?>"><?php echo __('Alle Produkte von %1', $brandObj->getName()) ?></a></span>
+                <!-- brand --> 
+            </div>
+        </div>
+<?php }
+?>

@@ -1,0 +1,111 @@
+.nav-sections{
+    z-index:999;
+
+    ul{
+        li{
+            font-size: 16px;
+        }
+    }
+
+    .megamenu-wrapper{
+        border: 0 !important;
+        box-shadow: 0px 17px 24px -6px rgba(0,0,0,0.3);
+    	top: 47px !important;
+        border-bottom: 5px solid @primary_color !important;
+    }
+
+    .level0 {
+        margin-right: 0px;
+
+        > .level-top {
+            color: @navbar_link_color;
+            font-family: 'Oswald', sans-serif;
+            font-size: 15px;
+            padding: 0 11px !important;
+            text-transform: uppercase;
+
+            > span {
+                text-transform: uppercase;
+            }
+			
+			&.ui-state-active,
+			&.ui-state-focus,
+            &:hover {
+        		background-color: #e6e6e6;
+	            color: @navbar_bg_color !important;
+
+        		> a {
+		            color: @navbar_bg_color !important;
+		        }
+            }
+        }
+
+        &.submenu {
+        	display: flex !important;
+    		flex-wrap: wrap;
+
+    		& > li {
+    			display: block;
+			    width: 19%;
+
+			    > a {
+			    	background-color: @navbar_bg_color !important;
+		            color: @navbar_link_color !important;
+		            font-size: 14px;
+		            font-family: 'Oswald', sans-serif;
+		            font-weight: bold;
+    				text-align: center;
+
+    				&:active,
+    				&:focus,
+    				&:hover {
+    					background-color: @navbar_bg_color !important;
+		            	color: @navbar_link_color !important;
+    				}
+			    }
+    		}
+        }
+    }
+
+    .level1 {
+        &.submenu{
+            border: unset;
+            box-shadow: unset;
+
+        }
+    }
+    li.level1 {
+        > a:hover,
+        > a.ui-state-focus {
+            background-color: #030000;
+            color: #ffffff !important;
+            text-decoration: none;
+        }
+
+    }
+
+    .level2{
+        >a{
+            font-size: 13px;
+        }
+    }
+}
+
+.nav-sections.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+/* responsive */
+    @media (max-width: 767px) {
+        .nav-sections.fixed {
+            width:auto;
+        }
+    }
+
+    @media (max-width: 370px) {
+        .nav-sections {
+            left:-100%;
+        }
+    }

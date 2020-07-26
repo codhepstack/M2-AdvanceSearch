@@ -1,0 +1,42 @@
+form{
+    margin-bottom: 20px;
+
+
+    //checkbox remove break before label
+    .field{
+        position: relative;
+        input[type="checkbox"]{
+            position: absolute;
+        }
+        input[type="checkbox"] + label,
+        input[type="checkbox"] + .label,
+        input[type="checkbox"] + label.label
+        {
+            padding-left:20px;
+
+            p{
+                display: inline-block;
+            }
+        }
+    }
+}
+
+//requiered hint
+.required-field{
+    margin: 10px 0 0;
+    display: block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    color: @required_red;
+    font-size: 1.2rem;
+}
+
+//contact form add *
+.contact-index-index{
+    .label.tc_check{
+        &::after{
+            content:"*";
+            color: @required_red;
+        }
+    }
+}

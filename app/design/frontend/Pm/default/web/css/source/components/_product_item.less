@@ -1,0 +1,175 @@
+.products-grid,
+.products {
+    .product-item-info {
+        padding: 10px;
+        border: 0px;
+        box-sizing: border-box;
+
+        //&:not(:hover):not(.active) .product-item-inner,  <-- this line is causing problems in the email template, thats why it is commented out and everything set to important to make styling work
+        .product-item-inner {
+            position: static !important;
+            height: auto !important;
+            width: auto !important;
+            box-shadow: none !important;
+            overflow: initial !important;
+            margin: 0 !important;
+            padding: 0px !important;
+            border: 0 !important;
+        }
+        &:hover {
+            margin: 0;
+            border: 0;
+            position: static;
+            box-shadow: none;
+            padding: 10px;
+        }
+
+        .product-item-details{
+            position: static;
+
+            span.price-label{
+                display: block;
+            }
+            span.product-per-unit-price{
+                display: block;
+            }
+            .price-to{
+                display: none;
+            }
+            a.minimal-price-link{
+                display: none;
+            }
+        }
+    }
+    .product-items {
+        display: flex;
+        flex-wrap: wrap;
+
+        .product-item {
+            position: relative;
+            padding-bottom: 70px !important;
+            border: 1px solid transparent;
+
+            &:hover {
+                border: 1px solid #e7e7e7;
+                box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+            }
+
+            .product-item-link {
+                font-family: 'Oswald', sans-serif;
+                font-size: 17px;
+            }
+            img {
+                display: inline-block;
+                width: auto;
+            }
+            .toneart-offered-price {
+                display: block;
+            }
+            .minimal-price-link,
+            .price-excluding-tax,
+            .price-including-tax,
+            .saved-money-toneart {
+                font-size: 14px;
+            }
+            .price-container {
+                .price-including-tax {
+                    .price {
+                        font-size: 34px;
+                        font-family: 'Oswald', sans-serif;
+                    }
+                }
+            }
+            .btn button {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+    
+            .actions-primary {
+                position: absolute;
+                bottom: 20px;
+            }
+            .actions-secondary {
+                position: absolute;
+                bottom: 5px;
+            }
+        }
+    }
+}
+.page-products {
+    .product-item-actions {
+        position: static;
+    }
+}
+
+
+/*************************
+//Product-Item in wishlist
+*************************/
+
+.products-grid.wishlist{
+    .product-items{
+        .product-item{
+            .product-item-info{
+                .price-box.price-final_price{
+                    margin-bottom: 35px;
+                }
+                .product-item-inner{
+                    .box-tocart{
+                        float: left;
+
+                        > fieldset{
+                            margin-bottom: 0;
+                        }
+
+                        .product-item-actions{
+                            .actions-primary{
+                                left: 10px;
+                            }
+                        }
+
+                    }
+                    .product-item-actions{
+                        float: right;
+                        margin-top: 20px
+                    }
+                    .field.comment-box{
+                        margin-top: unset;
+                    }
+                }
+                .product-per-unit-price{
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+
+/*************************
+//Product-Item in wishlist - Responsive
+*************************/
+@media (max-width: 639px){
+
+    .products-grid.wishlist{
+        .product-items{
+            .product-item{
+                .product-item-info{
+                    .product-item-inner{
+                        .box-tocart{
+                            .product-item-actions{
+                                .actions-primary{
+                                    bottom: 45px;
+                                }
+                            }
+    
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

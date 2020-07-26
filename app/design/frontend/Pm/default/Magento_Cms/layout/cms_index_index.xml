@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--/**
+ * Override the CMS index index file to add the head icons on the home page only
+ * PM JM - 23.07.20, @link - https://trello.com/c/Pe5jGRUM/144-anpassungen-header-adjustment-header
+ */-->
+<page  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+		<referenceContainer name="page.wrapper">
+			<block class="Magento\Cms\Block\Block" name="head_icons" before="main.content">
+		        <arguments>
+		            <argument name="block_id" xsi:type="string">head_icons</argument>
+		        </arguments>
+		    </block>
+		</referenceContainer>
+    </body>
+</page>
+

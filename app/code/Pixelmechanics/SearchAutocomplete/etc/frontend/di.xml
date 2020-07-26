@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--/**
+ * Constructor Type Class to change the behaviour of the Search Factory class.
+ * PM PS, 30.04.20, @link - https://trello.com/c/fR4dyPJV/96-styling-der-basissuchfunktion-im-standard-von-magento-styling-of-magento-default-search-functionality
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Pixelmechanics\SearchAutocomplete\Model\SearchFactory">
+        <arguments>
+            <argument name="map" xsi:type="array">
+                <item name="suggest" xsi:type="string">Pixelmechanics\SearchAutocomplete\Model\Search\Suggested</item>
+                <item name="product" xsi:type="string">Pixelmechanics\SearchAutocomplete\Model\Search\Product</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

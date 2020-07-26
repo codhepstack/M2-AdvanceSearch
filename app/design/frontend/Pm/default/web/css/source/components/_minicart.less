@@ -1,0 +1,25 @@
+.minicart-wrapper{
+    position: absolute;
+    right: 20px;
+
+    .action.showcart{
+        .counter.qty{
+            float: left;
+            margin-right: 5px;
+            
+            /* Siehe https://trello.com/c/Zu9mo60Z/85-ajaxloading-animation#comment-5eb55001449b0b7cad278d99 */
+            background-color: @bg_dark_grey;    
+        }
+    }
+    .block-minicart{
+        z-index: 9999;
+    }
+}
+
+/* responsive */
+@media (max-width: 767px) {
+    .minicart-wrapper{
+        top:10px;
+        right: 15px;
+    }
+}

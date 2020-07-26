@@ -1,0 +1,20 @@
+
+.badges{
+    position: absolute;
+    z-index: 9;
+
+    .badge_sale, .badge_new{
+        //Parameter-List for pm_badge: @size; @font-size; @font-color; @background
+        .pm_badge();
+    }
+}
+
+.product.media{
+    .badges {
+        .badge_sale, .badge_new{
+            //Parameter-List for pm_badge: @size; @font-size; @font-color; @background
+            .pm_badge(@size: 80px; @font-size: 20px);
+        }
+    }
+}
+

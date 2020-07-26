@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--/**
+ * Default head block layout file of the custom theme
+ * PM PS, 13.04.20, @link - TBD
+ */-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="js/pm_custom.js"/>
+        <!--// Added the PM custom CSS in the theme header. PM PS, 04.06.2020, @link - https://trello.com/c/LtEeKt2d/78-konzeption-abstimmen-des-designs-mit-toneart-support-f%C3%BCr-peter-lang-->
+        <link src="css/pm_custom.css"/>
+    </head>
+</page>

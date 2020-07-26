@@ -1,0 +1,52 @@
+<?php
+/**
+ * @author : PS
+ * @template-Version : Magento 2.3.4
+ * @description : Cookie notice Template File.
+ * @date : 29th Apr'20
+ * @link : https://trello.com/c/YflZ9WkX/95-einrichten-der-dsgvo-konformit%C3%A4t-inkl-cookie-banner-setting-up-gdpr-compliance-including-cookie-banner
+ */
+
+/** @var \Magento\Cookie\Block\Html\Notices $block */
+?>
+<?php 
+$_pmHelper = $this->helper('Pixelmechanics\Theme\Helper\Data');
+if ($this->helper(\Magento\Cookie\Helper\Cookie::class)->isCookieRestrictionModeEnabled()) : 
+?>
+    <?php if($_pmHelper->getStoreConfig('pm_general/gdpr/enable_gdpr')) :?>
+        <div role="alertdialog"
+            tabindex="-1"
+            class="message global cookie"
+            id="notice-cookie-block"
+            style="display: none;">
+            <div role="document" class="content" tabindex="0">
+            <?php /* added the cookie content block to display the content on frontend*/ ?>
+                <?php echo $_pmHelper->getStoreConfig('pm_general/gdpr/gdpr_content'); ?>
+                <div class="actions">
+                    <?php /* added the cookie content button to display on the frontend*/ ?>
+                    <?php
+                        $moreInfoText = $_pmHelper->getStoreConfig('pm_general/gdpr/gdpr_link_text');
+                        $acceptText = $_pmHelper->getStoreConfig('pm_general/gdpr/gdpr_button_text');
+                    ?>
+                    <a class="action allow primary" href="<?php echo $_pmHelper->getStoreConfig('pm_general/gdpr/gdpr_link'); ?>" target="_blank"><?php echo __($moreInfoText); ?></a>
+                    <button id="btn-cookie-allow" class="action allow primary">
+                        <span><?= $block->escapeHtml(__($acceptText)) ?></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "#notice-cookie-block": {
+                    "cookieNotices": {
+                        "cookieAllowButtonSelector": "#btn-cookie-allow",
+                        "cookieName": "<?= /* @noEscape */ \Magento\Cookie\Helper\Cookie::IS_USER_ALLOWED_SAVE_COOKIE ?>",
+                        "cookieValue": <?= /* @noEscape */ $this->helper(\Magento\Cookie\Helper\Cookie::class)->getAcceptedSaveCookiesWebsiteIds() ?>,
+                        "cookieLifetime": <?= /* @noEscape */ $this->helper(\Magento\Cookie\Helper\Cookie::class)->getCookieRestrictionLifetime() ?>,
+                        "noCookiesUrl": "<?= $block->escapeJs($block->escapeUrl($block->getUrl('cookie/index/noCookies'))) ?>"
+                    }
+                }
+            }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

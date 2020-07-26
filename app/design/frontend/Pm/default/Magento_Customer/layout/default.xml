@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--/**
+ * @author : PS
+ * @description : Overide the customer account layour file to remove the links and also append custom elements
+ * @link: https://trello.com/c/QbiyHrj7/93-anpassung-des-benutzerbereiches-adjustments-in-user-account
+ * @date : 1st May'20
+ */-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!--// Remove Blocks //-->
+        <!-- Recently order -->
+        <referenceBlock name="sale.reorder.sidebar" remove="true" />
+        <!-- Invitation Link In top Header -->
+        <referenceBlock name="invitation_link_top" remove="true" />
+    </body>
+</page>

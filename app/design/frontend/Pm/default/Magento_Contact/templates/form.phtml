@@ -1,0 +1,86 @@
+<?php
+/**
+* @author : PS
+* @description : Override default contact page
+* @link: https://trello.com/c/2SbaFyzF/104-standard-kontaktformular-mit-spamschutz-standard-contact-form-incl-spam-protect
+* @date : 27th April'20
+*/
+
+/** @var \Magento\Contact\Block\ContactForm $block */
+?>
+<?php $_pmHelper = $this->helper('Pixelmechanics\Theme\Helper\Data'); ?>
+<div class="contact-form-main">
+    <div class="block-left">
+        <form class="form contact"
+        action="<?= $block->escapeUrl($block->getFormAction()) ?>"
+        id="contact-form"
+        method="post"
+        data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+        data-mage-init='{"validation":{}}'>
+            <fieldset class="fieldset">
+                <legend class="legend"><span><?= $block->escapeHtml(__('Write Us')) ?></span></legend><br />
+                <div class="field note no-label"><?= $block->escapeHtml(__('Jot us a note and we’ll get back to you as quickly as possible.')) ?></div>
+                <div class="field name required">
+                    <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+                    <div class="control">
+                        <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('name') ?: $this->helper(\Magento\Contact\Helper\Data::class)->getUserName()) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                    </div>
+                </div>
+                <div class="field email required">
+                    <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                    <div class="control">
+                        <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('email') ?: $this->helper(\Magento\Contact\Helper\Data::class)->getUserEmail()) ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+                    </div>
+                </div>
+                <div class="field telephone">
+                    <label class="label" for="telephone"><span><?= $block->escapeHtml(__('Phone Number')) ?></span></label>
+                    <div class="control">
+                        <input name="telephone" id="telephone" title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>" value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('telephone')) ?>" class="input-text" type="text" />
+                    </div>
+                </div>
+                <div class="field comment required">
+                    <label class="label" for="comment"><span><?= $block->escapeHtml(__('What’s on your mind?')) ?></span></label>
+                    <div class="control">
+                        <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('What’s on your mind?')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('comment')) ?></textarea>
+                    </div>
+                </div>
+                <?= $block->getChildHtml('form.additional.info') ?>
+            </fieldset>
+            <?// Add the terms and condition checkbox //?>
+            <?php if($_pmHelper->getStoreConfig('pm_general/terms/enable_terms_contact')) {?>
+                <div class="field tc-check required">
+                    <div class="control">
+                        <input type="checkbox" id="tc-check" name="tc-check" data-validate="{required:true}" class="input-checkbox checkbox required" value="1">
+                        <label for="tc-check" class="label tc_check">
+                            <?php 
+                                $termsLink = $block->getUrl($_pmHelper->getStoreConfig('pm_general/terms/terms_link'));
+                                $termLabel = $_pmHelper->getStoreConfig('pm_general/terms/terms_text');
+                            ?>
+                            <a href="<?php echo $termsLink ?>" target="_blank">
+                                <?php  echo $termLabel; ?>
+                            </a>
+                        </label>
+                    </div>
+                <div class="required-field">*<?php echo __('Required Fields');?></div>
+                </div>
+            <?php } ?>
+
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <input type="hidden" name="hideit" id="hideit" value="" />
+                    <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
+                        <span><?= $block->escapeHtml(__('Submit')) ?></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="block-right">
+        <?php if($_pmHelper->getStoreConfig('pm_general/contact/content') != '') {?>
+            <div class="inner-content"><?php echo $_pmHelper->getStoreConfig('pm_general/contact/content');?></div>
+        <?php } ?>
+        <?php if($_pmHelper->getStoreConfig('pm_general/contact/enable_map')) {?>
+            <div class="map-content"><?php echo $_pmHelper->getStoreConfig('pm_general/contact/embed_map');?></div>
+        <?php } ?>
+    </div>
+</div>

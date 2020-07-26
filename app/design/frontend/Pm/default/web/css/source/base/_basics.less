@@ -1,0 +1,27 @@
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: @default_text_color;
+
+    p{
+        font-size: 16px;
+        line-height: 1.7;
+    }
+}
+
+.content-heading:before {
+    content: "";
+}
+/* Fixed Navigation */
+    main.fixed_nav {
+        padding-top: 47px;
+    }
+
+
+/* responsive */
+    @media (max-width: 768px) {
+        main.fixed_nav {
+            padding-top: 0px;
+        }
+    }

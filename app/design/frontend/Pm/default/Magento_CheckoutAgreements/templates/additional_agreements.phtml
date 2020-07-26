@@ -1,0 +1,53 @@
+<?php
+/**
+ * Override the aditional agreement template file 
+ * PM PS, 04.05.20, @link https://trello.com/c/ISWxDvZj/85-einrichtung-des-checkout-prozesses-implement-check-out-process
+ */
+
+/**
+ * @var $block \Magento\CheckoutAgreements\Block\Agreements
+ */
+if (!$block->getAgreements()) {
+    return;
+}
+/* called helper  to get correct Wysiwyg editor value updated by AA on 23.07.2019 */
+$helper = $this->helper('Pixelmechanics\Template\Helper\Data');
+
+
+/** @var \Magento\CheckoutAgreements\Model\ResourceModel\Agreement\Collection $agreementsCollection */
+$agreementsCollection = $block->getAgreements();
+$agreementMappedArray = [];
+/** @var \Magento\CheckoutAgreements\Model\Agreement $agreement */
+foreach ($agreementsCollection as $agreement) {
+    if ($agreement->getIsActive()) {
+
+        $textValue =  $helper->getWysiwygAttributeValue($agreement->getCheckboxText()); 
+        $agreementMappedArray[] = [
+            'mode' => $agreement->getMode(),
+            'agreementId' => $agreement->getAgreementId(),
+            'checkboxText' => $textValue,
+            'content' => $agreement->getContent()
+        ];
+    }
+}
+$agreementJson = json_encode($agreementMappedArray);
+?>
+
+<div data-bind="scope: 'checkout-agreements-component-scope'" class="checkout-agreements-block">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "checkout-agreements-component-scope": {
+                        "component": "Magento_CheckoutAgreements/js/view/checkout-agreements",
+                        "agreements": <?= /* @noEscape */ $agreementJson ?>,
+                        "isVisible": true
+                    }
+                }
+            }
+        }
+    }
+</script>
